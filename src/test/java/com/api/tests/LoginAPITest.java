@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.testng.annotations.Test;
 
 import com.api.pojo.UserCredentials;
-import static com.api.utils.ConfigManager.*;
+import static com.api.utils.ConfigManager2.*;
 
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;

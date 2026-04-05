@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ConfigManager {
+public class ConfigManager2 {
 	// WAP to read properties file from src/test/resources/config/config.properties
 
 	private static Properties prop = new Properties(); // create object of properties class
 	private static String path = "config/config.properties";
 	private static String env;
 
-	private ConfigManager() {
+	private ConfigManager2() {
 
 	}
 
@@ -52,7 +52,7 @@ public class ConfigManager {
 
 	}
 
-	public static String getProperty(String key) {
+	public static String getProperty(String key) throws IOException {
 
 		return prop.getProperty(key);
 
