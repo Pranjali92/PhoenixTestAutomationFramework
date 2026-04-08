@@ -47,7 +47,7 @@ public class MasterAPITest {
 	@Test
 	public void invalidTokenMasterAPITest() {
 		given()
-		.baseUri(getProperty("BASE_URL"))
+		.baseUri(getProperty("BASE_URL")) 
 		.and()
 		.header("Authorization", "")
 		.log().uri()
