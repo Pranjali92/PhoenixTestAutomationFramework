@@ -3,6 +3,8 @@ package com.api.tests;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
 import static com.api.constant.Roles.*;
 
 import static com.api.utils.AuthTokenProvider.*;
@@ -26,25 +28,13 @@ public class UserDetailsAPITest {
 	public void userDetailsAPITest() throws IOException {
 		
 		
-		
-		Header authHeader = new Header("Authorization" , getToken(SUP));
+	
 		given()
-		.baseUri(getProperty("BASE_URL"))
-		.and()
-		.header(authHeader)
-		.and()
-		.accept(ContentType.JSON)
-		.log().uri()
-		.log().method() 
-		.log().body()
-		.log().headers()
+		.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 		.get("userdetails")
 		.then()
-		.log().all()
-		.statusCode(200)
-		.time(Matchers.lessThan(2000L))
-		.and()
+		.spec(SpecUtil.responseSpec_OK())
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"));
 		
 	}
