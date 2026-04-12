@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.*;
 
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 import static com.api.constant.Roles.*;
@@ -18,21 +20,11 @@ public class MasterAPITest {
 	@Test
 	public void masterAPITest(){
 		given()
-		.baseUri(getProperty("BASE_URL"))
-		.and()
-		.header("Authorization", getToken(FD))
-		.and()
-		.contentType("")
-		.log().uri()
-		.log().method()
-		.log().headers()
+		.spec(SpecUtil.requestSpecWithAuth(ENG))
 		.when()
 		.post("master")
 		.then()
-		.log().all()
-		.statusCode(200)
-		.body("message", equalTo("Success"))
-		.time(lessThan(1000L))
+		.spec(SpecUtil.responseSpec_OK())
 		.body("data", notNullValue())
 		.body("data",hasKey("mst_oem"))
 		.body("data",hasKey("mst_model"))
@@ -47,17 +39,11 @@ public class MasterAPITest {
 	@Test
 	public void invalidTokenMasterAPITest() {
 		given()
-		.baseUri(getProperty("BASE_URL")) 
-		.and()
-		.header("Authorization", "")
-		.log().uri()
-		.log().method()
-		.log().headers()
+		.spec(SpecUtil.requestSpec())
 		.when()
 		.get("/dashboard/count")
 		.then()
-		.log().all()
-		.statusCode(401);
+		.spec(SpecUtil.responseSpec_TEXT(401));
 		
 	}
 
