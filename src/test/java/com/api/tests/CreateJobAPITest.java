@@ -14,6 +14,7 @@ import com.api.pojo.Customer;
 import com.api.pojo.CustomerAddress;
 import com.api.pojo.CustomerProduct;
 import com.api.pojo.Problems;
+import static com.api.utils.DateTimeUtil.*;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -28,7 +29,7 @@ public class CreateJobAPITest {
 		
 		Customer customer = new Customer("pranjali", "Nirmal", "8400908767", "", "pranjalinirmal08@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("503", "shreeany", "wkt road", "starbucks", "shivaji nagar", "444609", "India", "Maharashtra");
-		CustomerProduct customerProduct = new CustomerProduct("2025-02-01T18:30:00.000Z", "12308054197783", "12308054197783", "12308054197783", "2025-02-01T18:30:00.000Z", 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "12308054197783", "12308054197783", "12308054197783", getTimeWithDaysAgo(10), 1, 1);
 		Problems problems = new Problems(1, "Battery Issue");
 		List<Problems> problemsList = new ArrayList<Problems>();
 		problemsList.add(problems);
@@ -36,7 +37,7 @@ public class CreateJobAPITest {
 		
 		CreateJobPayload createJobPayload = new CreateJobPayload(0, 2, 1, 1, customer, customerAddress, customerProduct, problemsList);
 		
-		
+		    
 		
 		given()
 		.spec(SpecUtil.requestSpecWithAuth(FD, createJobPayload))
