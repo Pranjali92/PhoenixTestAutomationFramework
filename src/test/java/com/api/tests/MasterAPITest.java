@@ -1,30 +1,29 @@
 package com.api.tests;
 
-import static org.hamcrest.Matchers.*;
+import static com.api.constant.Roles.ENG;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.notNullValue;
 
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
-
-import static com.api.constant.Roles.*;
-import static com.api.utils.AuthTokenProvider.*;
-import static com.api.utils.ConfigManager.*;
-
-import static io.restassured.RestAssured.*;
 
 public class MasterAPITest {
 	
 	
-	@Test
+	@Test(description="Verifying if the master api is working for FD user", groups = {"api","regression","smoke"})
 	public void masterAPITest(){
 		given()
-		.spec(SpecUtil.requestSpecWithAuth(ENG))
+		.spec(requestSpecWithAuth(ENG))
 		.when()
 		.post("master")
 		.then()
-		.spec(SpecUtil.responseSpec_OK())
+		.spec(responseSpec_OK())
 		.body("data", notNullValue())
 		.body("data",hasKey("mst_oem"))
 		.body("data",hasKey("mst_model"))
@@ -36,14 +35,14 @@ public class MasterAPITest {
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema.json"));
 	}
 	
-	@Test
+	@Test(description="Verifying if the master api is giving correct status code for invalid token", groups = {"api","negative","regression","smoke"})
 	public void invalidTokenMasterAPITest() {
 		given()
-		.spec(SpecUtil.requestSpec())
+		.spec(requestSpec())
 		.when()
 		.get("/dashboard/count")
 		.then()
-		.spec(SpecUtil.responseSpec_TEXT(401));
+		.spec(responseSpec_TEXT(401));
 		
 	}
 
