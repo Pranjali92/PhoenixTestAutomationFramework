@@ -66,6 +66,24 @@ public static RequestSpecification requestSpecWithAuth(Roles role) {
 	
 }
 
+
+public static RequestSpecification requestSpecWithAuth(Roles role, Object payload) {
+	RequestSpecification requestSpecification = new RequestSpecBuilder()
+			.setBaseUri(getProperty("BASE_URL"))
+			.setContentType(ContentType.JSON)
+			.setAccept(ContentType.JSON)
+			.addHeader("Authorization", AuthTokenProvider.getToken(role) )
+			.setBody(payload)
+			.log(LogDetail.URI)
+			.log(LogDetail.METHOD)
+			.log(LogDetail.HEADERS)
+			.log(LogDetail.BODY)
+			.build();
+			
+			return requestSpecification;
+	
+}
+
 public static ResponseSpecification responseSpec_OK() {
 	ResponseSpecification responseSpecification=new ResponseSpecBuilder()
 	.expectContentType(ContentType.JSON)
