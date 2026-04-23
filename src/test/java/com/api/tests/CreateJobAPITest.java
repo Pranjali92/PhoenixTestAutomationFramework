@@ -17,11 +17,12 @@ import com.api.constant.Problem;
 import com.api.constant.Product;
 import com.api.constant.ServiceLocation;
 import com.api.constant.Warranty_Status;
-import com.api.pojo.CreateJobPayload;
-import com.api.pojo.Customer;
-import com.api.pojo.CustomerAddress;
-import com.api.pojo.CustomerProduct;
-import com.api.pojo.Problems;
+import com.api.request.model.CreateJobPayload;
+import com.api.request.model.Customer;
+import com.api.request.model.CustomerAddress;
+import com.api.request.model.CustomerProduct;
+import com.api.request.model.Problems;
+
 import static com.api.utils.DateTimeUtil.*;
 import static com.api.utils.SpecUtil.*;
 
