@@ -1,7 +1,6 @@
 package com.demo.csv;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,13 +14,9 @@ public class ReadCSVFile {
 	public static void main(String[] args) throws IOException, CsvException {
 		
 		
-//		File csvFile = new File(
-//				"C:\\Users\\dell\\Desktop\\SDET with Jatin\\JAVA module\\PhoenixTestAutomationFramework\\src\\main\\resources\\testData\\LoginCreds.csv");
-//		FileReader fr = new FileReader(csvFile);
-//		
+
 		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream("testData/LoginCreds.csv");
 		InputStreamReader isr= new InputStreamReader(is);
-		
 		CSVReader csvReader = new CSVReader(isr);
 
 		List<String[]> dataList = csvReader.readAll();
